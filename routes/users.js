@@ -3,15 +3,10 @@ var router = express.Router();
 var User = require('../models/user')
 
 // Register
-router.get('/register', function (req, res, next) {
+router.get('/register', function (req, res) {
   res.render('register')
 });
 
-router.get('/', (req, res, next) => {
-  User.find({}, (err, users) => {
-    res.send(users)
-  })
-})
 // Login
 router.get('/login', function (req, res) {
   res.render('login')

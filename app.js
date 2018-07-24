@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var hbs = require('hbs');
 var expressValidator = require('express-validator');
@@ -29,6 +30,11 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+//BodyParser Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 //Public folder - publicly accessible
@@ -94,7 +100,9 @@ app.use(function (err, req, res, next) {
 });
 
 //Port
-app.listen(8000, function () {
-  console.log('server live at 8000')
+app.set('port', (process.env.PORT || 3000));
+
+app.listen(app.get('port'), function(){
+  console.log('Server started at 3000');
 })
 module.exports = app;
